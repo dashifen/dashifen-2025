@@ -1,5 +1,5 @@
  Many times Dash tries.
- Block themes ellude them thus far.
+ Block themes elude them thus far.
  Maybe not this time?
 
  

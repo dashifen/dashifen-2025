@@ -1,0 +1,27 @@
+{
+  "license": "MIT",
+  "name": "dashifen/dashifen-2025",
+  "description": "A block theme for Dash's sites.",
+  "minimum-stability": "stable",
+  "type": "wordpress-theme",
+  "authors": [
+    {
+      "name": "David Dashifen Kees (they/them)",
+      "homepage": "https://dashifen.com",
+      "role": "developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dashifen\\WordPress\\Themes\\Dashifen2025\\": "src"
+    }
+  },
+  "require": {
+    "php": ">=8.4",
+    "dashifen/wp-handler": "^11"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  }
+}
