@@ -3,12 +3,11 @@
 namespace Dashifen\WordPress\Themes\Dashifen2025;
 
 use Dashifen\WPHandler\Handlers\HandlerException;
-use Dashifen\WPHandler\Traits\OptionsManagementTrait;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
 
 class Theme extends AbstractThemeHandler
 {
-  use OptionsManagementTrait;
+  public const string SLUG = 'dashifen-2025';
   
   /**
    * Uses the addAction and/or addFilter methods to attach protected methods of
@@ -20,7 +19,53 @@ class Theme extends AbstractThemeHandler
   public function initialize(): void
   {
     if (!$this->isInitialized()) {
+      $this->addAction('init', 'removeVariousCoreActions', PHP_INT_MAX);
+      $this->addAction('wp_enqueue_scripts', 'removeAssets', PHP_INT_MAX);
       $this->addAction('wp_enqueue_scripts', 'addAssets');
+    }
+  }
+  
+  /**
+   * Removes core actions related to emojis and the WordPress skip link code.
+   *
+   * @return void
+   */
+  protected function removeVariousCoreActions(): void
+  {
+    // the following get rid of the emoticon to emoji transformations.  now
+    // that we can add emojis via the keyboard on likely every possible
+    // platform, if someone types :) we'll leave it that way rather than
+    // wasting cycles converting it to 🙂.
+    
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_filter('the_content_feed', 'wp_staticize_emoji');
+    remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+    
+    // finally, we remove the core version of the skip link behaviors.  we can
+    // make this happen all on our own some other way and, like other styles
+    // we've removed, they're inline, so they can't get cached.
+    
+    remove_action('wp_footer', 'the_block_template_skip_link');
+  }
+  
+  /**
+   * Removes core assets that we don't need for this theme.
+   *
+   * @return void
+   */
+  protected function removeAssets(): void
+  {
+    if (!is_user_logged_in()) {
+      
+      // the WP dashicons are unnecessary for this theme unless a person is
+      // logged in when the admin bar is on-screen.  so to save a bit of time,
+      // we can simply deregister this style when no one is logged in.
+      
+      wp_deregister_style('dashicons');
     }
   }
   
@@ -31,11 +76,6 @@ class Theme extends AbstractThemeHandler
    */
   protected function addAssets(): void
   {
-    $this->enqueue('assets/scripts/copyright-year.js');
-  }
-  
-  protected function getOptionNames(): array
-  {
-    return ['php-version'];
+    $this->enqueue('assets/scripts/dashifen-2025.js');
   }
 }
