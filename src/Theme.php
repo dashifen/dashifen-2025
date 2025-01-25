@@ -10,8 +10,8 @@ class Theme extends AbstractThemeHandler
   public const string SLUG = 'dashifen-2025';
   
   /**
-   * Uses the addAction and/or addFilter methods to attach protected methods of
-   * this object to the WordPress ecosystem of action and filter hooks.
+   * Uses addAction and/or addFilter to attach protected methods of this object
+   * to the ecosystem of WordPress action and filter hooks.
    *
    * @return void
    * @throws HandlerException
@@ -19,6 +19,13 @@ class Theme extends AbstractThemeHandler
   public function initialize(): void
   {
     if (!$this->isInitialized()) {
+      
+      // we initialize our agents at priority level one so that they can, in
+      // turn, use the default priority level of ten and know that it will not
+      // have happened yet.  theoretically, if any of them try to use priority
+      // level one it could be an issue, so let's not do that.
+      
+      $this->addAction('init', 'initializeAgents', 1);
       $this->addAction('init', 'removeVariousCoreActions', PHP_INT_MAX);
       $this->addAction('wp_enqueue_scripts', 'removeAssets', PHP_INT_MAX);
       $this->addAction('wp_enqueue_scripts', 'addAssets');

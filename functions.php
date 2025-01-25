@@ -4,6 +4,8 @@ namespace Dashifen\WordPress\Themes;
 
 use Dashifen\Exception\Exception;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
+use Dashifen\WordPress\Themes\Dashifen2025\Agents\ShushingAgent;
+use Dashifen\WPHandler\Agents\Collection\Factory\AgentCollectionFactory;
 
 defined('ABSPATH') || die;
 
@@ -49,15 +51,21 @@ if (get_option('dashifen2025-php-version', '0.0') !== PHP_VERSION) {
   
   // by initializing our Theme in this anonymous function, we prevent anything
   // from being loaded into the global WordPress scope which ensures that said
-  // ecosystem won't be able to access its public methods.  if an Exception is
-  // thrown during its initialization, then we'll catch it with the Theme's
-  // catcher.  by default, in environments when WP_DEBUG is on, it'll emit the
-  // error on-screen.  otherwise, it'll try to write it to the WordPress
-  // debug.log file.
+  // ecosystem won't be able to access its public methods.
   
   try {
-    new Theme()->initialize();
+    $theme = new Theme();
+    $acf = new AgentCollectionFactory();
+    $acf->registerAgent(ShushingAgent::class);
+    $theme->setAgentCollection($acf);
+    $theme->initialize();
   } catch (Exception $e) {
+    
+    //if an Exception is thrown during its initialization, then we'll catch it
+    // with the Theme's catcher.  by default, in environments when WP_DEBUG is
+    // on, it'll emit the error on-screen.  otherwise, it'll try to write it to
+    // the WordPress debug.log file.
+    
     Theme::catcher($e);
   }
 })();
