@@ -15,3 +15,60 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Generated on fullsiteediting.com. No code version.
 */
+
+* {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.wp-site-blocks {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  
+  .site-header,
+  .site-footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  
+  .wp-block-group {
+    flex-grow: 1;
+  }
+}
+
+.site-footer {
+  /*noinspection CssUnresolvedCustomProperty*/
+  
+  ul {
+    list-style: none;
+    font-size: 0;
+    margin-block-end: var(--wp--style--block-gap);
+    padding: 0;
+  }
+  
+  li {
+    display: inline-block;
+    font-size: 1rem;
+    
+    /*noinspection CssUnresolvedCustomProperty*/
+    
+    &:not(:last-child)::after {
+      content: '';
+      transform: rotate(28deg);
+      display: inline-block;
+      height: 1.5rem;
+      width: .0625rem;
+      margin-inline: 1rem;
+      background: var(--wp--preset--color--contrast);
+      vertical-align: text-bottom;
+    }
+  }
+}

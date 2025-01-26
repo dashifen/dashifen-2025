@@ -84,5 +84,6 @@ class Theme extends AbstractThemeHandler
   protected function addAssets(): void
   {
     $this->enqueue('assets/scripts/dashifen-2025.js');
+    $this->enqueue('style.css');
   }
 }

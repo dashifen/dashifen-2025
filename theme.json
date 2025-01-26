@@ -73,11 +73,18 @@
 		},
 		"elements": {
 			"button": {
+				"color": {
+					"background": "var(--wp--preset--color--base)",
+					"text": "var(--wp--preset--color--contrast)"
+				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--nunito)"
 				}
 			},
 			"caption": {
+				"color": {
+					"text": "var(--wp--preset--color--contrast)"
+				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--nunito)"
 				}
@@ -88,8 +95,17 @@
 				}
 			},
 			"link": {
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--secondary)"
+					}
+				},
+				"color": {
+					"text": "var(--wp--preset--color--primary)"
+				},
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--nunito)"
+					"fontFamily": "var(--wp--preset--font-family--nunito)",
+					"textDecoration": "underline"
 				}
 			}
 		},
