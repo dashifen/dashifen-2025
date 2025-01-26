@@ -29,6 +29,7 @@ class Theme extends AbstractThemeHandler
       $this->addAction('init', 'removeVariousCoreActions', PHP_INT_MAX);
       $this->addAction('wp_enqueue_scripts', 'removeAssets', PHP_INT_MAX);
       $this->addAction('wp_enqueue_scripts', 'addAssets');
+      $this->addAction('after_setup_theme', 'addEditorStyles');
     }
   }
   
@@ -84,6 +85,16 @@ class Theme extends AbstractThemeHandler
   protected function addAssets(): void
   {
     $this->enqueue('assets/scripts/dashifen-2025.js');
-    $this->enqueue('style.css');
+    $this->enqueue('assets/styles/dashifen-2025.css');
+  }
+  
+  /**
+   * Adds our custom CSS to the editor, too.
+   *
+   * @return void
+   */
+  protected function addEditorStyles(): void
+  {
+    add_editor_style($this->getStylesheetDir() . '/assets/styles/dashifen-2025.css');
   }
 }

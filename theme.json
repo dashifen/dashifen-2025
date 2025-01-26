@@ -62,7 +62,8 @@
 					"name": "Nunito",
 					"slug": "nunito"
 				}
-			]
+			],
+			"fontSizes": []
 		},
 		"useRootPaddingAwareAlignments": true
 	},
@@ -71,6 +72,7 @@
 			"background": "var(--wp--preset--color--base)",
 			"text": "var(--wp--preset--color--contrast)"
 		},
+		"css": "",
 		"elements": {
 			"button": {
 				"color": {
@@ -110,7 +112,8 @@
 			}
 		},
 		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--nunito)"
+			"fontFamily": "var(--wp--preset--font-family--nunito)",
+			"fontSize": "var(--wp--preset--font-size--small)"
 		}
 	},
 	"version": 3,
