@@ -125,8 +125,8 @@ class Theme extends AbstractThemeHandler
   protected function addAssets(): void
   {
     $fonts[] = $this->enqueue('//fonts.googleapis.com/css2?family=Nunito&display=swap');
-    $this->enqueue('assets/styles/dashifen-2025.css', $fonts);
-    $this->enqueue('assets/scripts/dashifen-2025.js');
+    $this->enqueue('assets/styles/dashifen.css', $fonts);
+    $this->enqueue('assets/scripts/dashifen.js');
   }
   
   /**
