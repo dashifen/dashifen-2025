@@ -8,7 +8,7 @@ const css = async function () {
   return src('assets/styles/dashifen.scss', { sourcemaps: true })
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([autoPrefixer(), cssNano()]))
-    .pipe(dest('assets', { sourcemaps: '.' }));
+    .pipe(dest('assets/styles', { sourcemaps: '.' }));
 };
 
 const watcher = async function () {
