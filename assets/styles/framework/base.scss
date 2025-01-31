@@ -1,0 +1,65 @@
+@use 'mixins';
+@use 'variables';
+
+html, body {
+  color: variables.$black;
+  container-type: inline-size;
+  font: normal 125%/1.6 variables.$font; // usually 20px
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html.admin-bar {
+  height: calc(100% - 32px);
+  
+  @include mixins.adminBarBreakpoint {
+    height: calc(100% - 46px);
+  }
+}
+
+a {
+  &:link,
+  &:visited {
+    color: variables.$purple;
+  }
+  
+  &:active,
+  &:focus,
+  &:hover {
+    color: variables.$pink;
+  }
+}
+
+body {
+  display: grid;
+  block-size: 100%;
+  font-size: mixins.rem(18px);
+  grid-template-rows: auto 1fr auto;
+  min-block-size: 100%;
+}
+
+main {
+  // full bleed source:
+  // https://frontendmasters.com/blog/full-bleed-layout-with-modern-css
+  
+  --max-width: 1000px;
+  --min-margin: 1em;
+  
+  margin-inline: max(var(--min-margin), 50cqw - var(--max-width) / 2);
+  
+  .full-bleed {
+    margin-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
+  }
+}
+
+ul.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}

@@ -10,23 +10,19 @@
 <body {{ function('body_class') }}>
   <a href="#content-container" class="screen-reader-text">Skip to the Content</a>
 
-  <div class="sticky-footer-pusher">
-    <div class="sticky-footer-container">
-      {% include '@partials/header.twig' %}
+    {% include '@partials/header.twig' %}
 
-      <main id="content-container" aria-labelledby="entry-title">
-        <header>
-          {% block entry_title %}
-            <h1 id="entry-title">{{ page.entry_title }}</h1>
-          {% endblock %}
-        </header>
+    <main id="content-container" aria-labelledby="entry-title">
+      <header>
+        {% block entry_title %}
+          <h1 id="entry-title">{{ page.entry_title }}</h1>
+        {% endblock %}
+      </header>
 
-        {% block content %}{% endblock %}
-      </main>
+      {% block content %}{% endblock %}
+    </main>
 
-      {% include '@partials/footer.twig' %}
-    </div>
-  </div>
+    {% include '@partials/footer.twig' %}
 
   {{ function('wp_footer') }}
 </body>

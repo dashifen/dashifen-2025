@@ -146,7 +146,6 @@ class Song extends AbstractEntity
   {
     return match ($property) {
       'name'                     => $this->song->name ?? $default,
-      
       // because the API JSON is converted from an XML file, we have some
       // strange property names within it.  luckily, we can use the same syntax
       // that we use for variable property names to grab strangely named
@@ -154,6 +153,7 @@ class Song extends AbstractEntity
       
       'track', 'artist', 'album' => $this->song->{$property}->{'#text'} ?? $default,
       'nowplaying'               => $this->song->{'@attr'}->nowplaying ?? $default,
+      'image'                    => $this->song->image[1]->{'#text'} ?? $default,
       default                    => $default,
     };
   }

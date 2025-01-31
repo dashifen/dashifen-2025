@@ -1,0 +1,14 @@
+$black: #060607;
+$white: #ffffff;
+$gray: #3b3c53;
+$pink: #c77093;
+$purple: #5d2189;
+$yellow: #8c6c0c;
+$silver: #dddddd;
+
+// Nunito is the web font we're using; the rest are copied from the modern
+// normalize styles so we fall back on the very thing that it wants to use as a
+// fallback.
+
+$font: Nunito, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji';

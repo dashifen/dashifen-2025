@@ -17,6 +17,7 @@ use Dashifen\WordPress\Themes\Dashifen2025\Entities\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\CurrentlyReading;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
 
 abstract class AbstractTemplate extends AbstractTimberTemplate
@@ -216,6 +217,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
       'debug' => self::isDebug(),
       'time'  => new TimeOfDay()->toArray(),
       'song'  => new Song()->toArray(),
+      'books' => new CurrentlyReading()->toArray(),
       'site'  => [
         'url'    => home_url(),
         'title'  => 'David Dashifen Kees',

@@ -12,19 +12,24 @@ class TimeOfDay extends AbstractEntity
 {
   use WPDebuggingTrait;
   
-  protected(set) int $sunrise {
+  // in memory, the sunrise, sunset, and tomorrow properties are  always
+  // integers.  but, because we want to use the format property, set by
+  // promotion in the constructor, to make them look pretty in their get hook,
+  // the type hint has to also include strings.
+  
+  protected(set) int|string $sunrise {
     get {
       return $this->getLocalTime($this->sunrise)->format($this->format);
     }
   }
   
-  protected(set) int $sunset {
+  protected(set) int|string $sunset {
     get {
       return $this->getLocalTime($this->sunset)->format($this->format);
     }
   }
   
-  protected(set) int $tomorrow {
+  protected(set) int|string $tomorrow {
     get {
       return $this->getLocalTime($this->tomorrow)->format($this->tomorrow);
     }

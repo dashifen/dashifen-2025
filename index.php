@@ -5,7 +5,7 @@ namespace Dashifen\WordPress\Themes;
 use Exception;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WordPress\Themes\Dashifen2025\Router;
-use Dashifen\Dashifen2024\Templates\Framework\TemplateFactory;
+use Dashifen\WordPress\Themes\Dashifen2025\Templates\Framework\TemplateFactory;
 
 defined('ABSPATH') || die;
 
