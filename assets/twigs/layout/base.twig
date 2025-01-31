@@ -1,0 +1,33 @@
+<!doctype html>
+<html class="no-js {{ menus.admin ? 'admin-bar' : '' }}" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title ~ ' | ' ~ site.title }}</title>
+  <link rel="icon" href="{{ site.images ~ site.logo.src }}">
+  {{ function('wp_head') }}
+</head>
+<body {{ function('body_class') }}>
+  <a href="#content-container" class="screen-reader-text">Skip to the Content</a>
+
+  <div class="sticky-footer-pusher">
+    <div class="sticky-footer-container">
+      {% include '@partials/header.twig' %}
+
+      <main id="content-container" aria-labelledby="entry-title">
+        <header>
+          {% block entry_title %}
+            <h1 id="entry-title">{{ page.entry_title }}</h1>
+          {% endblock %}
+        </header>
+
+        {% block content %}{% endblock %}
+      </main>
+
+      {% include '@partials/footer.twig' %}
+    </div>
+  </div>
+
+  {{ function('wp_footer') }}
+</body>
+</html>

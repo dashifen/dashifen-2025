@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "license": "MIT",
+  "name": "dashifen-2025",
+  "description": "A theme for Dash's sites.",
+  "devDependencies": {
+    "autoprefixer": "^10.4",
+    "cssnano": "^7.0",
+    "gulp": "^5.0",
+    "gulp-postcss": "^10.0",
+    "gulp-rename": "^2.0",
+    "gulp-sass": "^6.0",
+    "modern-normalize": "^3.0",
+    "sass": "^1.77",
+    "sass-loader": "^16.0"
+  },
+  "scripts": {
+    "watch": "webpack --env development --watch",
+    "build": "webpack --env production"
+  }
+}

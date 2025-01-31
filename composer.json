@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "name": "dashifen/dashifen-2025",
-  "description": "A block theme for Dash's sites.",
+  "description": "A theme for Dash's sites.",
   "minimum-stability": "stable",
   "type": "wordpress-theme",
   "authors": [
@@ -18,7 +18,9 @@
   },
   "require": {
     "php": ">=8.4",
-    "dashifen/wp-handler": "^11"
+    "dashifen/wp-handler": "^11",
+    "dashifen/wp-templates": "^6",
+    "timber/timber": "^2"
   },
   "config": {
     "optimize-autoloader": true,
