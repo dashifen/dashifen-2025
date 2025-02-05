@@ -15,10 +15,10 @@ use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WPHandler\Traits\OptionsManagementTrait;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\TimeOfDay;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\CurrentlyReading;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
 
 abstract class AbstractTemplate extends AbstractTimberTemplate
 {

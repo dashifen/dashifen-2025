@@ -1,9 +1,10 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Time;
 
 use stdClass;
 use JsonException;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
 class SolarTime extends AbstractEntity
 {

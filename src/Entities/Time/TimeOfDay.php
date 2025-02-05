@@ -1,12 +1,13 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Time;
 
 use DateTime;
 use Exception;
 use DateTimeZone;
 use Dashifen\WPDebugging\WPDebuggingTrait;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
 class TimeOfDay extends AbstractEntity
 {

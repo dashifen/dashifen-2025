@@ -1,10 +1,16 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
 
 use JsonException;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
+/**
+ * The CurrentlyReading service object reaches out to the Hardcover.app API
+ * and grabs information about what Dash is currently reading and their
+ * progress.
+ */
 class CurrentlyReading extends AbstractEntity
 {
   /**

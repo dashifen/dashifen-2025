@@ -1,6 +1,8 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
+
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
 class Book extends AbstractEntity
 {
@@ -10,7 +12,7 @@ class Book extends AbstractEntity
   protected(set) string $title;
   
   /**
-   * @var Person[] people involved in the production of the book.
+   * @var Contributor[] people involved in the production of the book.
    */
   protected(set) array $people = [];
   
@@ -41,7 +43,7 @@ class Book extends AbstractEntity
     $this->image = $book->book->cached_image->url;
     
     foreach ($book->book->cached_contributors as $contributor) {
-      $this->people[] = new Person($contributor);
+      $this->people[] = new Contributor($contributor);
     }
   }
   

@@ -1,8 +1,10 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
 
-class Person extends AbstractEntity
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
+
+class Contributor extends AbstractEntity
 {
   protected(set) string $name;
   protected(set) string $role;
