@@ -1,6 +1,14 @@
 @use 'mixins';
 @use 'variables';
 
+:root {
+  // full bleed source:
+  // https://frontendmasters.com/blog/full-bleed-layout-with-modern-css
+  
+  --max-width: 1000px;
+  --min-margin: 1em;
+}
+
 html, body {
   color: variables.$black;
   container-type: inline-size;
@@ -19,6 +27,9 @@ html.admin-bar {
 }
 
 a {
+  outline-color: variables.$yellow;
+  outline-offset: mixins.rem(4px);
+  
   &:link,
   &:visited {
     color: variables.$purple;
@@ -27,7 +38,7 @@ a {
   &:active,
   &:focus,
   &:hover {
-    color: variables.$pink;
+    color: variables.$yellow;
   }
 }
 
@@ -39,18 +50,14 @@ body {
   min-block-size: 100%;
 }
 
-main {
-  // full bleed source:
-  // https://frontendmasters.com/blog/full-bleed-layout-with-modern-css
-  
-  --max-width: 1000px;
-  --min-margin: 1em;
-  
+main,
+#site-header,
+#site-footer {
   margin-inline: max(var(--min-margin), 50cqw - var(--max-width) / 2);
-  
-  .full-bleed {
-    margin-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
-  }
+}
+
+main .full-bleed {
+  margin-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
 }
 
 ul.menu {

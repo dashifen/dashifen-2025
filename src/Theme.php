@@ -44,6 +44,7 @@ class Theme extends AbstractThemeHandler
       $this->addAction('after_setup_theme', 'prepareTheme');
       $this->addAction('wp_head', 'addPreConnections');
       $this->addAction('wp_enqueue_scripts', 'addAssets');
+      $this->addAction('enqueue_block_assets', 'addEditorAssets');
       $this->addFilter('pre_get_document_title', 'customizeTitle');
       
       // these two disengage this theme from the core WordPress template
@@ -124,9 +125,23 @@ class Theme extends AbstractThemeHandler
    */
   protected function addAssets(): void
   {
-    $fonts[] = $this->enqueue('//fonts.googleapis.com/css2?family=Nunito&display=swap');
-    $this->enqueue('assets/styles/dashifen.css', $fonts);
+    $this->enqueue('assets/styles/dashifen.css', $this->enqueueFonts());
     $this->enqueue('assets/scripts/dashifen.js');
+  }
+  
+  /**
+   * Returns an array of the web fonts used in this theme.
+   *
+   * @return array
+   */
+  protected function enqueueFonts(): array
+  {
+    return [$this->enqueue('//fonts.googleapis.com/css2?family=Nunito&display=swap')];
+  }
+  
+  protected function addEditorAssets(): void
+  {
+    $this->enqueue('assets/styles/admin.css', $this->enqueueFonts());
   }
   
   /**

@@ -19,14 +19,11 @@ class TemplateFactory
   {
     $namespace = 'Dashifen\\WordPress\\Themes\\Dashifen2025\\Templates\\';
     
-    $template = !class_exists($namespace . $template)
-      ? $namespace . 'DefaultTemplate'
-      : $namespace . $template;
+    if (!class_exists($namespace . $template)) {
+      $template = 'DefaultTemplate';
+    }
     
-    // we'll assume that, if it's a class that exists, $template refers to a
-    // child of our AbstractTemplate object.  if not, PHP will help us fix the
-    // problem when the return type hint fails.
-    
-    return new $template;
+    $namespacedTemplate = $namespace . $template;
+    return new $namespacedTemplate($template);
   }
 }

@@ -18,9 +18,12 @@ class DefaultTemplate extends AbstractTemplate
    */
   protected function getPageContext(array $siteContext): array
   {
+    $title = get_the_title();
+    
     return [
-      'title'   => get_the_title(),
-      'content' => apply_filters('the_content', get_the_content()),
+      'title'       => $title,
+      'entry_title' => $title,
+      'content'     => $this->getContent(),
     ];
   }
 }

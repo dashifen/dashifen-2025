@@ -19,8 +19,9 @@ class HomepageTemplate extends AbstractTemplate
   protected function getPageContext(array $siteContext): array
   {
     return [
-      'title'           => 'Home',
-      'entry_title'     => 'A Bit About Dash',
+      'title'       => 'Home',
+      'entry_title' => 'A Bit About Dash',
+      'content'     => $this->getContent(),
     ];
   }
 }

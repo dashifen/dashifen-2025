@@ -8,7 +8,7 @@
   {{ function('wp_head') }}
 </head>
 <body {{ function('body_class') }}>
-  <a href="#content-container" class="screen-reader-text">Skip to the Content</a>
+  <a href="#content-container" class="visually-hidden">Skip to the Content</a>
 
     {% include '@partials/header.twig' %}
 
@@ -19,7 +19,9 @@
         {% endblock %}
       </header>
 
-      {% block content %}{% endblock %}
+      {% block content %}
+        {{ page.content }}
+      {% endblock %}
     </main>
 
     {% include '@partials/footer.twig' %}

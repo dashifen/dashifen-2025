@@ -1,2 +1,20 @@
 @use '../../node_modules/modern-normalize/modern-normalize';
+@use 'framework/mixins';
+@use 'framework/wordpress';
 @use 'framework/base';
+
+#site-header {
+  margin-block-end: mixins.rem(48px);
+  
+  #page-title {
+    font-size: mixins.rem(36px);
+    font-weight: bold;
+    margin-block: mixins.rem(24px) 0;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: row;
+    gap: mixins.rem(16px);
+  }
+}

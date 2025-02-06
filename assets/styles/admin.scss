@@ -1,0 +1,22 @@
+@use '../../node_modules/modern-normalize/modern-normalize';
+@use 'framework/variables';
+
+.block-editor-iframe__body {
+  font-family: variables.$font;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-inline: 100px;
+}
+
+a {
+  &:link,
+  &:visited {
+    color: variables.$purple;
+  }
+  
+  &:active,
+  &:focus,
+  &:hover {
+    color: variables.$yellow;
+  }
+}

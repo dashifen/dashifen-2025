@@ -5,9 +5,9 @@ namespace Dashifen\WordPress\Themes\Dashifen2025\Templates\Framework;
 use RegexIterator;
 use Timber\Timber;
 use FilesystemIterator;
+use WP_HTML_Tag_Processor;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use Dashifen\Repository\RepositoryException;
 use Dashifen\Transformer\TransformerException;
 use Dashifen\WPHandler\Traits\CaseChangingTrait;
 use Dashifen\WPHandler\Handlers\HandlerException;
@@ -25,31 +25,23 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
   use CaseChangingTrait;
   use OptionsManagementTrait;
   
-  protected int $postId;
-  
   /**
    * AbstractTemplate constructor.
    *
    * @throws HandlerException
    * @throws TemplateException
    * @throws TransformerException
-   * @throws RepositoryException
    */
-  public function __construct()
-  {
+  public function __construct(
+    protected string $template,
+    protected int $postId = 0,
+  ) {
     $this->postId = get_the_ID();
     
     try {
-      parent::__construct(
-        $this->getTwig(),
-        $this->getContext()
-      );
+      parent::__construct($this->getTwig(), $this->getContext());
     } catch (BaselineTemplateException $e) {
-      throw new TemplateException(
-        $e->getMessage(),
-        $e->getCode(),
-        $e
-      );
+      throw new TemplateException($e->getMessage(), $e->getCode(), $e);
     }
   }
   
@@ -211,14 +203,15 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
   private function getSiteContext(): array
   {
     return [
-      'year'  => date('Y'),
-      'home'  => is_front_page(),
-      'twig'  => basename($this->getTwig(), '.twig'),
-      'debug' => self::isDebug(),
-      'time'  => new TimeOfDay()->toArray(),
-      'song'  => new Song()->toArray(),
-      'books' => new CurrentlyReading()->toArray(),
-      'site'  => [
+      'year'     => date('Y'),
+      'home'     => is_front_page(),
+      'twig'     => basename($this->getTwig(), '.twig'),
+      'template' => $this->template,
+      'debug'    => self::isDebug(),
+      'time'     => new TimeOfDay()->toArray(),
+      'song'     => new Song()->toArray(),
+      'books'    => new CurrentlyReading()->toArray(),
+      'site'     => [
         'url'    => home_url(),
         'title'  => 'David Dashifen Kees',
         'images' => get_stylesheet_directory_uri() . '/assets/images/',
@@ -227,7 +220,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
           'src' => 'witch-hat.png',
         ],
       ],
-      'menus' => [
+      'menus'    => [
         'main'   => $this->getMenu('main'),
         'footer' => $this->getMenu('footer'),
         'admin'  => is_admin_bar_showing(),
@@ -298,7 +291,8 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
     }
     
     if ($debug || self::isDebug()) {
-      $context['page']['context'] = print_r($context, true);
+      $siteContext = array_filter($context, fn($key) => $key !== 'page', ARRAY_FILTER_USE_KEY);
+      $context['page']['context'] = print_r($siteContext, true);
     }
     
     return Timber::compile($file, $context);
@@ -326,5 +320,32 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
   protected function getOptionNames(): array
   {
     return ['twigs', 'version'];
+  }
+  
+  /**
+   * Used by our children to get a post's content.
+   *
+   * @return string
+   */
+  protected function getContent(): string
+  {
+    $content = new WP_HTML_Tag_Processor(
+      apply_filters('the_content', get_the_content())
+    );
+    
+    // for reasons Dash hasn't figured out yet, the content filters applied
+    // above are cramming width and height attributes onto images making them
+    // all stretchy and weird.  so, we'll look for images and remove them.
+    // there's probably a better way to do this, and maybe they'll even look
+    // for it someday!
+    
+    while($content->next_tag()) {
+      if ($content->get_tag() === 'IMG') {
+        $content->remove_attribute('width');
+        $content->remove_attribute('height');
+      }
+    }
+    
+    return (string) $content;
   }
 }
