@@ -153,7 +153,7 @@ class Song extends AbstractEntity
       
       'track', 'artist', 'album' => $this->song->{$property}->{'#text'} ?? $default,
       'nowplaying'               => $this->song->{'@attr'}->nowplaying ?? $default,
-      'image'                    => $this->song->image[1]->{'#text'} ?? $default,
+      'image'                    => $this->song->image[3]->{'#text'} ?? $default,
       default                    => $default,
     };
   }

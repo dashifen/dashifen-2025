@@ -15,7 +15,7 @@ use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WPHandler\Traits\OptionsManagementTrait;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
+//use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
@@ -208,7 +208,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
       'twig'     => basename($this->getTwig(), '.twig'),
       'template' => $this->template,
       'debug'    => self::isDebug(),
-      'time'     => new TimeOfDay()->toArray(),
+      //'time'     => new TimeOfDay()->toArray(),
       'song'     => new Song()->toArray(),
       'books'    => new CurrentlyReading()->toArray(),
       'site'     => [

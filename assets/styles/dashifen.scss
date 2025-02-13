@@ -1,12 +1,16 @@
 @use '../../node_modules/modern-normalize/modern-normalize';
 @use 'framework/mixins';
+@use 'framework/variables';
 @use 'framework/wordpress';
 @use 'framework/base';
 
 #site-header {
-  margin-block-end: mixins.rem(48px);
+  background-color: variables.$purple;
+  margin-block-end: mixins.rem(24px);
+  padding-block-end: mixins.rem(24px);
   
   #page-title {
+    color: variables.$white;
     font-size: mixins.rem(36px);
     font-weight: bold;
     margin-block: mixins.rem(24px) 0;
@@ -16,5 +20,79 @@
     display: flex;
     flex-direction: row;
     gap: mixins.rem(16px);
+    
+    .menu-item {
+      color: variables.$gray;
+      outline-color: variables.$white;
+      outline-offset: mixins.rem(5px);
+      outline-width: mixins.rem(1px);
+      text-decoration: none;
+      
+      &:active,
+      &:focus,
+      &:hover {
+        color: variables.$white;
+        outline: solid;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+#site-footer {
+  background-color: variables.$purple;
+  color: variables.$white;
+  display: grid;
+  grid-gap: mixins.rem(10px);
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "listening reading"
+    "copyright copyright";
+  margin-block-start: mixins.rem(48px);
+  
+  
+  .reading,
+  .listening {
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: fit-content(300px) 1fr;
+    grid-template-areas:
+      "header header"
+      "image text";
+    
+    h3 {
+      grid-area: header;
+    }
+    
+    img {
+      max-block-size: 300px;
+      max-inline-size: 300px;
+      grid-area: image;
+    }
+    
+    p {
+      align-self: end;
+      padding-inline-start: mixins.rem(10px);
+      grid-area: text;
+    }
+  }
+  
+  .reading {
+    grid-area: reading;
+  }
+  
+  .listening {
+    grid-area: listening;
+  }
+  
+  .copyright {
+    grid-area: copyright;
   }
 }

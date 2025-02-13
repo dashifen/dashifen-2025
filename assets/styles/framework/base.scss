@@ -53,17 +53,22 @@ body {
 main,
 #site-header,
 #site-footer {
-  margin-inline: max(var(--min-margin), 50cqw - var(--max-width) / 2);
+  padding-inline: max(var(--min-margin), 50cqw - var(--max-width) / 2);
 }
 
 main .full-bleed {
-  margin-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
+  padding-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
 }
 
 ul.menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+img {
+  border: 1px solid variables.$black;
+  border-radius: mixins.rem(5px);
 }
 
 .hidden {
