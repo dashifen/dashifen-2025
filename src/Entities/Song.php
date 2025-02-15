@@ -24,7 +24,9 @@ class Song extends AbstractEntity
   protected(set) string $artist;    // the artist that produced that album
   protected(set) string $image {    // the album art, when available.
     set {
-      $this->image = empty($value) ? 'compact-disc-solid.svg' : $value;
+      $this->image = empty($value)
+        ? get_stylesheet_directory_uri() . '/assets/images/compact-disc-solid.svg'
+        : $value;
     }
   }
   
@@ -34,7 +36,7 @@ class Song extends AbstractEntity
   public function __construct()
   {
     $songData = get_transient(self::TRANSIENT);
-    if ($songData === false) {
+    if ($songData === false || empty($songData['track'])) {
       
       // if we couldn't get song data out of the database, then we can get it
       // from the API.  but, to do so, we need our API key.  it should be

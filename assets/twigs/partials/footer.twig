@@ -15,6 +15,10 @@
       <em>{{ books[0].title }}</em><br>
       by {{ books[0].people[0].name }}
     </p>
+    <figure>
+      <canvas class="progress" width="150" height="150" data-progress="{{ books[0].progress / books[0].pages }}"></canvas>
+      <figcaption>{{ books[0].percent }}
+    </figure>
   </div>
 
   <p class="copyright">

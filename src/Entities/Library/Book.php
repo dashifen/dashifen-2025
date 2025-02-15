@@ -2,6 +2,7 @@
 
 namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
 
+use Dashifen\Exception\Exception;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
 class Book extends AbstractEntity
@@ -19,17 +20,28 @@ class Book extends AbstractEntity
   /**
    * @var int number of pages in the book.
    */
-  protected(set) int $pages;
+  protected(set) int $pages = 0;
   
   /**
    * @var int number of pages Dash has read in the book.
    */
-  protected(set) int $progress;
+  protected(set) int $progress = 0;
+  
+  /**
+   * @var string percent complete based on the prior two properties
+   */
+  public string $percent {
+    get {
+      return round($this->progress / $this->pages * 100) . '%';
+    }
+  }
   
   /**
    * @var string cover art for the book.
    */
   protected(set) string $image;
+  
+  
   
   public function __construct(object $book)
   {
@@ -58,6 +70,7 @@ class Book extends AbstractEntity
       'title'    => $this->title,
       'pages'    => $this->pages,
       'progress' => $this->progress,
+      'percent'  => $this->percent,
       'image'    => $this->image,
       'people'   => array_map(fn($person) => $person->toArray(), $this->people),
     ];
