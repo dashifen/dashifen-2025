@@ -79,13 +79,11 @@ class TimeOfDay extends AbstractEntity
       : $this->calculatePercent($now, $solarTime->sunrise, $solarTime->sunset);
     
     $timeOfDay = match (true) {
-      $numericTimeOfDay <= 25  => 'morning',
-      $numericTimeOfDay <= 75  => 'day',
-      $numericTimeOfDay <= 100 => 'evening',
-      $numericTimeOfDay <= 125 => 'twilight',
-      $numericTimeOfDay <= 175 => 'night',
-      $numericTimeOfDay <= 200 => 'dawn',
-      default                  => 'oops',
+      $numericTimeOfDay <= 25, $numericTimeOfDay >= 176 => 'morning',
+      $numericTimeOfDay <= 75                           => 'day',
+      $numericTimeOfDay <= 125                          => 'evening',
+      $numericTimeOfDay <= 175                          => 'night',
+      default                                           => 'oops',
     };
     
     // the numeric time of day shouldn't be greater than 200 unless our

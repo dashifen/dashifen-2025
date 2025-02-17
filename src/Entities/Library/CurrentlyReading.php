@@ -2,6 +2,7 @@
 
 namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
 
+use WP_Error;
 use JsonException;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
@@ -40,14 +41,7 @@ class CurrentlyReading extends AbstractEntity
       return [];
     }
     
-    $response = wp_remote_post('https://api.hardcover.app/v1/graphql', [
-      'body'    => json_encode(['query' => $this->getQuery()]),
-      'headers' => [
-        'content-type'  => 'application/json',
-        'authorization' => HARDCOVER_API_KEY,
-      ],
-    ]);
-    
+    $response = self::fetch($this->getQuery());
     if (wp_remote_retrieve_response_code($response) !== 200) {
       return [];
     }
@@ -64,12 +58,26 @@ class CurrentlyReading extends AbstractEntity
       $books[] = new Book($book);
     }
     
-    // 86400 is a day in seconds.  this means our transient should last no
-    // more than 24 hours, so we don't slam into the Hardcover.app API too
-    // frequently.
-    
-    set_transient($transient, $books, 86400);
+    set_transient($transient, $books, DAY_IN_SECONDS);
     return $books;
+  }
+  
+  /**
+   * Given a GraphQL query, bounces it off the Hardcover.app API.
+   *
+   * @param string $query
+   *
+   * @return array|WP_Error
+   */
+  public static function fetch(string $query): array|WP_Error
+  {
+    return wp_remote_post('https://api.hardcover.app/v1/graphql', [
+      'body'    => json_encode(['query' => $query]),
+      'headers' => [
+        'content-type'  => 'application/json',
+        'authorization' => HARDCOVER_API_KEY,
+      ],
+    ]);
   }
   
   /**

@@ -1,0 +1,34 @@
+{% extends '@layout/base.twig' %}
+
+{% block content %}
+  {{ page.content }}
+
+  {% for shelf, contents in page.library %}
+    <section class="{{ shelf }}">
+      <header><h2>{{ contents.heading }}</h2></header>
+
+      {% if shelf == 'annual' %}
+        <p>More recently finished books are at the start of this list.</p>
+      {% else %}
+        <p>More recently updated books are at the start of this list.</p>
+      {% endif %}
+
+      <div class="shelf">
+        {% for book in contents.books %}
+          <figure class="book">
+            <img src="{{ book.image }}" role="presentation" alt="">
+            <figcaption>
+              <strong>{{ book.title }}</strong> by {{ book.people.author }}
+
+              {% for type, people in book.people %}
+                {% if type != 'author' %}
+                  ({{ type }}: {{ people }})
+                {% endif %}
+              {% endfor %}
+            </figcaption>
+          </figure>
+        {% endfor %}
+      </div>
+    </section>
+  {% endfor %}
+{% endblock %}

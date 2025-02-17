@@ -7,8 +7,6 @@ use Dashifen\WordPress\Themes\Dashifen2025\Templates\Framework\AbstractTemplate;
 class HomepageTemplate extends AbstractTemplate
 {
   /**
-   * getPageContext
-   *
    * Returns an array of information necessary for the compilation of a
    * specific twig template.
    *

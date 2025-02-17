@@ -46,6 +46,7 @@ class Theme extends AbstractThemeHandler
       $this->addAction('wp_enqueue_scripts', 'addAssets');
       $this->addAction('enqueue_block_assets', 'addEditorAssets');
       $this->addFilter('pre_get_document_title', 'customizeTitle');
+      $this->addFilter('theme_page_templates', 'filterPageTemplates');
       
       // these two disengage this theme from the core WordPress template
       // loader.  instead, this one uses the Router object to load template
@@ -154,6 +155,22 @@ class Theme extends AbstractThemeHandler
     $titleParts[] = !is_front_page() ? get_the_title() : 'Welcome';
     $titleParts[] = get_bloginfo('name');
     return vsprintf('%s | %s', $titleParts);
+  }
+  
+  /**
+   * Adds custom page templates for this theme because we're not using
+   * file-based page templates.
+   *
+   * @param array $templates
+   *
+   * @return array
+   */
+  protected function filterPageTemplates(array $templates): array
+  {
+    $templates['reading'] = 'Reading Page';
+    $templates['listening'] = 'Listening Page';
+    asort($templates);
+    return $templates;
   }
   
   /**

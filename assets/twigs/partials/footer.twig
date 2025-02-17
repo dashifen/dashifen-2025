@@ -2,24 +2,25 @@
   <div class="listening">
     <h3>Listening:</h3>
     <img src="{{ song.image }}" role="presentation" alt="">
-    <p>
-      <em>{{ song.track }}</em><br>
-      by {{ song.artist }}
-    </p>
+    <p><em>{{ song.track }}</em><br>by {{ song.artist }}</p>
   </div>
 
   <div class="reading">
-    <h3>Reading:</h3>
-    <img src="{{ books[0].image }}" role="presentation" alt="">
-    <p>
-      <em>{{ books[0].title }}</em><br>
-      by {{ books[0].people[0].name }}
-    </p>
+    {% set book = books[0] %}
+    <h3><a href="/reading">Reading:</a></h3>
+    <img src="{{ book.image }}" role="presentation" alt="">
+    <p><em>{{ book.title }}</em><br>by {{ book.people['author'] }}</p>
     <figure>
-      <canvas class="progress" width="150" height="150" data-progress="{{ books[0].progress / books[0].pages }}"></canvas>
-      <figcaption>{{ books[0].percent }}
+      <canvas class="progress" width="150" height="150" data-progress="{{ book.progress / book.pages }}"></canvas>
+      <figcaption>{{ book.percent }}
     </figure>
   </div>
+
+  {% if time.timeOfDay != 'oops' %}
+    <p class="greeting">
+      Thank you for visiting, and based on my time zone, I hope you're having a good {{ time.timeOfDay }}!
+    </p>
+  {% endif %}
 
   <p class="copyright">
     Copyright &copy; {{ year }} David Dashifen Kees

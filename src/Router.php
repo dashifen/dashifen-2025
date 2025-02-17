@@ -20,10 +20,26 @@ class Router
   public function getTemplateObjectName(): string
   {
     return match (true) {
-      is_front_page() => 'HomepageTemplate',
+      is_page()       => $this->getPageTemplate(),
       is_singular()   => $this->getPostTypeTemplate(),
+      is_front_page() => 'HomepageTemplate',
       is_404()        => 'FourOhFourTemplate',
       default         => 'DefaultTemplate',
+    };
+  }
+  
+  /**
+   * Returns the template object name for this page defaulting to the
+   * DefaultTemplate, naturally.
+   *
+   * @return string
+   */
+  private function getPageTemplate(): string
+  {
+    return match (get_page_template_slug()) {
+      "reading"   => "ReadingTemplate",
+      "listening" => "ListeningTemplate",
+      default     => "DefaultTemplate",
     };
   }
   

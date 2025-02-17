@@ -105,11 +105,7 @@ class Song extends AbstractEntity
       $songData = self::BLANK_SONG;
     }
     
-    // 180 seconds seems reasonable as a time to check for a new song.  this
-    // way we don't do so every time a page loads, but after a few minutes,
-    // we'll see if there's new data for us online.
-    
-    set_transient(self::TRANSIENT, $songData, 180);
+    set_transient(self::TRANSIENT, $songData, 3 * MINUTE_IN_SECONDS);
     return $songData;
   }
   

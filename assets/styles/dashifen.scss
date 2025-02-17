@@ -22,7 +22,7 @@
     gap: mixins.rem(16px);
     
     .menu-item {
-      color: variables.$gray;
+      color: variables.$white;
       outline-color: variables.$white;
       outline-offset: mixins.rem(5px);
       outline-width: mixins.rem(1px);
@@ -31,20 +31,26 @@
       &:active,
       &:focus,
       &:hover {
-        color: variables.$white;
         outline: solid;
       }
     }
   }
 }
 
-
-
-
-
-
-
-
+.shelf {
+  display: grid;
+  grid-gap: mixins.rem(10px);
+  grid-template-columns: repeat(auto-fill, 150px);
+  
+  .book {
+    margin-inline: 0;
+    
+    img {
+      max-block-size: 220px;
+      inline-size: 100%;
+    }
+  }
+}
 
 #site-footer {
   background-color: variables.$purple;
@@ -54,9 +60,22 @@
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "listening reading"
+    "greeting greeting"
     "copyright copyright";
   margin-block-start: mixins.rem(48px);
   
+  a {
+    color: variables.$white;
+    outline-color: variables.$white;
+    outline-offset: mixins.rem(5px);
+    outline-width: mixins.rem(1px);
+    
+    &:active,
+    &:focus,
+    &:hover {
+      outline: solid;
+    }
+  }
   
   .reading,
   .listening {
@@ -86,6 +105,7 @@
   
   .reading {
     grid-area: reading;
+    margin-block-end: 1rem;
     position: relative;
     
     figure {
@@ -111,6 +131,7 @@
   
   .listening {
     grid-area: listening;
+    margin-block-end: 1rem;
     
     img {
       inline-size: 300px;
@@ -118,7 +139,13 @@
     }
   }
   
+  .greeting {
+    grid-area: greeting;
+    margin-block: 0;
+  }
+  
   .copyright {
     grid-area: copyright;
+    margin-block-start: 0;
   }
 }

@@ -15,7 +15,7 @@ use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WPHandler\Traits\OptionsManagementTrait;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
-//use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
@@ -72,16 +72,13 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
    */
   protected function getTemplateTwig(): string
   {
-    $objectNameParts = explode('\\', static::class);
-    $objectName = array_pop($objectNameParts);
+    // the template object's name has the word Template at the end of it.  we
+    // don't want that because it's not a part of our twig filenames.  we'll
+    // remove that, convert the otherwise PascalCase object names to
+    // kebab-case, and add the twig file extension to that result before
+    // returning it as a part of our Timber @templates namespace.
     
-    // the object's name has the word Template at the end of it.  we don't
-    // want that because it's not a part of our twig filenames.  we'll remove
-    // that, convert the otherwise PascalCase object names to kebab-case, and
-    // add the twig file extension to that result before returning it as a
-    // part of our Timber @templates namespace.
-    
-    $twig = str_replace('Template', '', $objectName);
+    $twig = str_replace('Template', '', $this->template);
     $twig = $this->pascalToCamelCase($twig) . '.twig';
     return '@templates/' . $twig;
   }
@@ -208,7 +205,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
       'twig'     => basename($this->getTwig(), '.twig'),
       'template' => $this->template,
       'debug'    => self::isDebug(),
-      //'time'     => new TimeOfDay()->toArray(),
+      'time'     => new TimeOfDay()->toArray(),
       'song'     => new Song()->toArray(),
       'books'    => new CurrentlyReading()->toArray(),
       'site'     => [
