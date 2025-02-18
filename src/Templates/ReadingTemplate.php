@@ -43,7 +43,7 @@ class ReadingTemplate extends DefaultTemplate
   {
     $transient = Theme::getPrefix() . 'library';
     $databaseData = get_transient($transient);
-    return true || $databaseData === false
+    return $databaseData === false
       ? $this->fetchApiData($transient)
       : $databaseData;
     

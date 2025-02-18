@@ -6,13 +6,6 @@
   {% for shelf, contents in page.library %}
     <section class="{{ shelf }}">
       <header><h2>{{ contents.heading }}</h2></header>
-
-      {% if shelf == 'annual' %}
-        <p>More recently finished books are at the start of this list.</p>
-      {% else %}
-        <p>More recently updated books are at the start of this list.</p>
-      {% endif %}
-
       <div class="shelf">
         {% for book in contents.books %}
           <figure class="book">

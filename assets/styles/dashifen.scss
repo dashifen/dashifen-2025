@@ -9,6 +9,10 @@
   margin-block-end: mixins.rem(24px);
   padding-block-end: mixins.rem(24px);
   
+  a {
+    text-decoration: none;
+  }
+  
   #page-title {
     color: variables.$white;
     font-size: mixins.rem(36px);
@@ -26,7 +30,6 @@
       outline-color: variables.$white;
       outline-offset: mixins.rem(5px);
       outline-width: mixins.rem(1px);
-      text-decoration: none;
       
       &:active,
       &:focus,
