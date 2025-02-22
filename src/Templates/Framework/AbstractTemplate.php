@@ -13,10 +13,11 @@ use Dashifen\WPHandler\Traits\CaseChangingTrait;
 use Dashifen\WPHandler\Handlers\HandlerException;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WPHandler\Traits\OptionsManagementTrait;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist\Song;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
+use Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist\Playlist;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
 use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
 
@@ -206,7 +207,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
       'template' => $this->template,
       'debug'    => self::isDebug(),
       'time'     => new TimeOfDay()->toArray(),
-      'song'     => new Song()->toArray(),
+      'song'     => (new Playlist()->tracks[0] ?? new Song())->toArray(),
       'books'    => new CurrentlyReading()->toArray(),
       'site'     => [
         'url'    => home_url(),

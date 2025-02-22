@@ -1,0 +1,24 @@
+{% extends '@layout/base.twig' %}
+
+{% block content %}
+  {{ page.content }}
+
+  <h2>Recent Scrobbles</h2>
+  <p>Scrobbling is the act of informing Last.fm that you've listened to a song.
+    So, these are the most recently scrobbled tracks that I've listened to
+    starting with my most recent scrobble.</p>
+
+  <ol class="shelf songs">
+    {% for song in page.playlist %}
+      <li>
+        <figure class="item">
+          <img src="{{ song.image }}" role="presentation" alt="">
+          <figcaption>
+            <strong>{{ song.name }}</strong> by {{ song.artist }}
+          </figcaption>
+        </figure>
+      </li>
+    {% endfor %}
+  </ol>
+
+{% endblock %}

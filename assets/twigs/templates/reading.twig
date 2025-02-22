@@ -6,22 +6,24 @@
   {% for shelf, contents in page.library %}
     <section class="{{ shelf }}">
       <header><h2>{{ contents.heading }}</h2></header>
-      <div class="shelf">
+      <ol class="shelf books">
         {% for book in contents.books %}
-          <figure class="book">
-            <img src="{{ book.image }}" role="presentation" alt="">
-            <figcaption>
-              <strong>{{ book.title }}</strong> by {{ book.people.author }}
+          <li>
+            <figure class="item">
+              <img src="{{ book.image }}" role="presentation" alt="">
+              <figcaption>
+                <strong>{{ book.title }}</strong> by {{ book.people.author }}
 
-              {% for type, people in book.people %}
-                {% if type != 'author' %}
-                  ({{ type }}: {{ people }})
-                {% endif %}
-              {% endfor %}
-            </figcaption>
-          </figure>
+                {% for type, people in book.people %}
+                  {% if type != 'author' %}
+                    ({{ type }}: {{ people }})
+                  {% endif %}
+                {% endfor %}
+              </figcaption>
+            </figure>
+          </li>
         {% endfor %}
-      </div>
+      </ol>
     </section>
   {% endfor %}
 {% endblock %}
