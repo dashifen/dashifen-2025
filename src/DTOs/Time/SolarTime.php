@@ -1,12 +1,12 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Time;
+namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs\Time;
 
 use stdClass;
 use JsonException;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
+use Dashifen\DTO\DTO;
 
-class SolarTime extends AbstractEntity
+class SolarTime extends DTO
 {
   protected(set) int $sunrise;
   protected(set) int $sunset;
@@ -26,23 +26,11 @@ class SolarTime extends AbstractEntity
     // pass either that string, '0', or what we extract from our parameters
     // through strtotime to store timestamps in this object.
     
-    $this->sunrise = strtotime($today !== null ? $this->extractSunrise($today) : '0');
-    $this->sunset = strtotime($today !== null ? $this->extractSunset($today) : '0');
-    $this->tomorrow = strtotime($tomorrow !== null ? $this->extractSunrise($tomorrow) : '0');
-  }
-  
-  /**
-   * Returns the sunrise, sunset, and tomorrow properties as an array.
-   *
-   * @return array
-   */
-  public function toArray(): array
-  {
-    return [
-      'sunrise'  => $this->sunrise,
-      'sunset'   => $this->sunset,
-      'tomorrow' => $this->tomorrow,
-    ];
+    parent::__construct([
+      'sunrise'  => strtotime($today !== null ? $this->extractSunrise($today) : '0'),
+      'sunset'   => strtotime($today !== null ? $this->extractSunset($today) : '0'),
+      'tomorrow' => strtotime($tomorrow !== null ? $this->extractSunrise($tomorrow) : '0'),
+    ]);
   }
   
   /**

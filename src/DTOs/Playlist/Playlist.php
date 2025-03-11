@@ -1,13 +1,13 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist;
+namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs\Playlist;
 
 use WP_Error;
 use JsonException;
+use Dashifen\DTO\DTO;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
-class Playlist extends AbstractEntity
+class Playlist extends DTO
 {
   /**
    * @var Song[]
@@ -21,8 +21,19 @@ class Playlist extends AbstractEntity
    */
   public function __construct(int $tracks = 60)
   {
+    parent::__construct(['tracks' => $this->getTracks($tracks)]);
+  }
+  
+  /**
+   * Fetches $tracks song from Last.fm
+   *
+   * @param int $tracks
+   *
+   * @return array
+   */
+  private function getTracks(int $tracks): array
+  {
     $transient = Theme::SLUG . '-playlist';
-    
     if (!($playlist = get_transient($transient))) {
       if (($playlist = $this->getPlaylist($tracks)) !== null) {
         
@@ -35,7 +46,7 @@ class Playlist extends AbstractEntity
       }
     }
     
-    $this->tracks = is_array($playlist) ? $playlist : [];
+    return is_array($playlist) ? $playlist : [];
   }
   
   /**
@@ -46,7 +57,7 @@ class Playlist extends AbstractEntity
    *
    * @return array|null
    */
-  protected function getPlaylist(int $tracks): ?array
+  private function getPlaylist(int $tracks): ?array
   {
     // when we decode the JSON returned to us from the last.fm API, we pass the
     // JSON_THROW_ON_ERROR flag so it'll throw a JsonException object instead
@@ -67,19 +78,13 @@ class Playlist extends AbstractEntity
       
       $playlist = [];
       foreach ($json->recenttracks->track as $track) {
-        
-        // notice that the null coalescing operator will produce the same
-        // value for these arguments as the Song constructor uses as the
-        // default values for its properties.  changes here (or there) should
-        // be reflected in both places.
-        
-        $playlist[] = new Song(
-          $track->name ?? '',
-          $track->album->{'#text'} ?? '',
-          $track->artist->{'#text'} ?? '',
-         ($track->{'@attr'}->nowplaying ?? 'false') === 'true' ?? false,
-          $track->image[3]->{'#text'} ?? '',
-        );
+        $playlist[] = new Song([
+          'name'    => $track->name ?? '',
+          'album'   => $track->album->{'#text'} ?? '',
+          'artist'  => $track->artist->{'#text'} ?? '',
+          'current' => ($track->{'@attr'}->nowplaying ?? 'false') === 'true' ?? false,
+          'image'   => $track->image[3]->{'#text'} ?? '',
+        ]);
       }
     } catch (JsonException) {
       $playlist = null;
@@ -121,6 +126,9 @@ class Playlist extends AbstractEntity
    */
   public function toArray(): array
   {
+    // we override the default toArray method to emit an array of song data
+    // rather than an array of song objects themselves.
+    
     return array_map(fn($track) => $track->toArray(), $this->tracks);
   }
 }

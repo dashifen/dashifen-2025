@@ -13,13 +13,13 @@ use Dashifen\WPHandler\Traits\CaseChangingTrait;
 use Dashifen\WPHandler\Handlers\HandlerException;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
 use Dashifen\WPHandler\Traits\OptionsManagementTrait;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\MenuItem;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist\Song;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Time\TimeOfDay;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\MenuItem;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Playlist\Song;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Time\TimeOfDay;
 use Dashifen\WPTemplates\AbstractTemplate as AbstractTimberTemplate;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist\Playlist;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Playlist\Playlist;
 use Dashifen\WPTemplates\TemplateException as BaselineTemplateException;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Library\CurrentlyReading;
 
 abstract class AbstractTemplate extends AbstractTimberTemplate
 {

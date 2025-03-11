@@ -1,7 +1,8 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities;
+namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs;
 
+use Dashifen\DTO\DTO;
 use Dashifen\Exception\Exception;
 use Timber\MenuItem as TimberMenuItem;
 
@@ -9,7 +10,7 @@ use Timber\MenuItem as TimberMenuItem;
  * The MenuItem entity receives information from Timber menu items and keeps
  * only the information we need after cramming it into our properties.
  */
-class MenuItem extends AbstractEntity
+class MenuItem extends DTO
 {
   /**
    * @var string the URL to which this menu item links
@@ -81,28 +82,14 @@ class MenuItem extends AbstractEntity
    */
   public function __construct(TimberMenuItem $item)
   {
-    $this->url = $item->url;
-    $this->label = $item->name();
-    $this->classes = $item->classes;
-    $this->children = $item->children;
-    $this->current = $item->current
-      || $item->current_item_ancestor
-      || $item->current_item_parent;
-  }
-  
-  /**
-   * Returns our properties as an array.
-   *
-   * @return array
-   */
-  public function toArray(): array
-  {
-    return [
-      'url'      => $this->url,
-      'label'    => $this->label,
-      'classes'  => $this->classes,
-      'children' => $this->children,
-      'current'  => $this->classes,
-    ];
+    parent::__construct([
+      'url'      => $item->url,
+      'label'    => $item->name(),
+      'classes'  => $item->classes,
+      'children' => $item->children,
+      'current'  => $item->current
+        || $item->current_item_ancestor
+        || $item->current_item_parent,
+    ]);
   }
 }

@@ -2,7 +2,7 @@
 
 namespace Dashifen\WordPress\Themes\Dashifen2025\Templates;
 
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Playlist\Playlist;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Playlist\Playlist;
 
 class ListeningTemplate extends DefaultTemplate
 {

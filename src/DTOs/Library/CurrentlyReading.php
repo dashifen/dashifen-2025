@@ -1,18 +1,18 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Library;
+namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs\Library;
 
 use WP_Error;
 use JsonException;
+use Dashifen\DTO\DTO;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
 /**
  * The CurrentlyReading service object reaches out to the Hardcover.app API
  * and grabs information about what Dash is currently reading and their
  * progress.
  */
-class CurrentlyReading extends AbstractEntity
+class CurrentlyReading extends DTO
 {
   /**
    * @var Book[] the books Dash is currently reading.
@@ -23,9 +23,12 @@ class CurrentlyReading extends AbstractEntity
   {
     $transient = Theme::getPrefix() . 'currently-reading';
     $databaseData = get_transient($transient);
-    $this->books = $databaseData === false
-      ? $this->fetchApiData($transient)
-      : $databaseData;
+    
+    parent::__construct([
+      'books' => $databaseData === false
+        ? $this->fetchApiData($transient)
+        : $databaseData,
+    ]);
   }
   
   /**
@@ -107,6 +110,11 @@ class CurrentlyReading extends AbstractEntity
     QUERY;
   }
   
+  /**
+   * Produces an array of book data instead of book objects.
+   *
+   * @return array
+   */
   public function toArray(): array
   {
     return array_map(fn($book) => $book->toArray(), $this->books);

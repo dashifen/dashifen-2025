@@ -1,15 +1,15 @@
 <?php
 
-namespace Dashifen\WordPress\Themes\Dashifen2025\Entities\Time;
+namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs\Time;
 
 use DateTime;
 use Exception;
 use DateTimeZone;
+use Dashifen\DTO\DTO;
 use Dashifen\WPDebugging\WPDebuggingTrait;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\AbstractEntity;
 
-class TimeOfDay extends AbstractEntity
+class TimeOfDay extends DTO
 {
   use WPDebuggingTrait;
   
@@ -40,8 +40,6 @@ class TimeOfDay extends AbstractEntity
   protected(set) string $timeOfDay;
   
   /**
-   * __construct
-   *
    * Uses the database or the sunrise-sunset.org API to get sunrise and sunset
    * times and calculates the site's time of day based on that.
    *
@@ -50,10 +48,7 @@ class TimeOfDay extends AbstractEntity
   public function __construct(
     private readonly string $format = 'n/j/Y \a\\t g:ia'
   ) {
-    $solarTime = $this->getSolarTime();
-    foreach ($solarTime as $property => $value) {
-      $this->$property = $value;
-    }
+    parent::__construct($this->getSolarTime());
   }
   
   /**
@@ -254,21 +249,5 @@ class TimeOfDay extends AbstractEntity
   private function getLocalTime(int $timestamp): DateTime
   {
     return $this->getTimestamp('America/New_York', $timestamp);
-  }
-  
-  /**
-   * Returns our properties as an array.
-   *
-   * @return array
-   */
-  public function toArray(): array
-  {
-    return [
-      'sunrise'         => $this->sunrise,
-      'sunset'          => $this->sunset,
-      'tomorrow'        => $this->tomorrow,
-      'timeOfDayNumber' => $this->timeOfDayNumber,
-      'timeOfDay'       => $this->timeOfDay,
-    ];
   }
 }

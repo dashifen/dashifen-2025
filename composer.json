@@ -18,9 +18,10 @@
   },
   "require": {
     "php": ">=8.4",
-    "dashifen/wp-handler": "^11",
-    "dashifen/wp-templates": "^6",
-    "timber/timber": "^2"
+    "dashifen/data-transfer-object": "^1.1",
+    "dashifen/wp-handler": "^11.0",
+    "dashifen/wp-templates": "^6.1",
+    "timber/timber": "^2.3"
   },
   "config": {
     "optimize-autoloader": true,

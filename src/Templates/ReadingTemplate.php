@@ -4,8 +4,8 @@ namespace Dashifen\WordPress\Themes\Dashifen2025\Templates;
 
 use JsonException;
 use Dashifen\WordPress\Themes\Dashifen2025\Theme;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\Book;
-use Dashifen\WordPress\Themes\Dashifen2025\Entities\Library\CurrentlyReading;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Library\Book;
+use Dashifen\WordPress\Themes\Dashifen2025\DTOs\Library\CurrentlyReading;
 
 class ReadingTemplate extends DefaultTemplate
 {
