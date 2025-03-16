@@ -25,7 +25,7 @@ class CurrentlyReading extends DTO
     $databaseData = get_transient($transient);
     
     parent::__construct([
-      'books' => $databaseData === false
+      'books' => !$databaseData
         ? $this->fetchApiData($transient)
         : $databaseData,
     ]);
@@ -50,7 +50,10 @@ class CurrentlyReading extends DTO
     }
     
     try {
-      $currentlyReading = json_decode(wp_remote_retrieve_body($response), flags: JSON_THROW_ON_ERROR);
+      $currentlyReading = json_decode(
+        wp_remote_retrieve_body($response),
+        flags: JSON_THROW_ON_ERROR
+      );
     } catch (JsonException) {
       return [];
     }

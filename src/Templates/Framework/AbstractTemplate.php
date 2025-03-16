@@ -37,7 +37,9 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
     protected string $template,
     protected int $postId = 0,
   ) {
-    $this->postId = get_the_ID();
+    $this->postId = is_home()
+      ? get_option('page_for_posts')
+      : get_the_ID();
     
     try {
       parent::__construct($this->getTwig(), $this->getContext());
@@ -207,7 +209,7 @@ abstract class AbstractTemplate extends AbstractTimberTemplate
       'template' => $this->template,
       'debug'    => self::isDebug(),
       'time'     => new TimeOfDay()->toArray(),
-      'song'     => (new Playlist()->tracks[0] ?? new Song())->toArray(),
+      'song'     => (new Playlist()->tracks[0] ?? new Song([]))->toArray(),
       'books'    => new CurrentlyReading()->toArray(),
       'site'     => [
         'url'    => home_url(),

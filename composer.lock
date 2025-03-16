@@ -91,16 +91,16 @@
         },
         {
             "name": "dashifen/data-transfer-object",
-            "version": "1.1.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/data-transfer-object.git",
-                "reference": "315694e29014ab3d62d45a53719e39d0b8b8df8b"
+                "reference": "74be2d882f2c196c9bb32e9d8d9ed795c004413b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/data-transfer-object/zipball/315694e29014ab3d62d45a53719e39d0b8b8df8b",
-                "reference": "315694e29014ab3d62d45a53719e39d0b8b8df8b",
+                "url": "https://api.github.com/repos/dashifen/data-transfer-object/zipball/74be2d882f2c196c9bb32e9d8d9ed795c004413b",
+                "reference": "74be2d882f2c196c9bb32e9d8d9ed795c004413b",
                 "shasum": ""
             },
             "require": {
@@ -128,9 +128,9 @@
             "description": "An object that exists to transfer data.",
             "support": {
                 "issues": "https://github.com/dashifen/data-transfer-object/issues",
-                "source": "https://github.com/dashifen/data-transfer-object/tree/1.1.0"
+                "source": "https://github.com/dashifen/data-transfer-object/tree/1.2.1"
             },
-            "time": "2025-03-10T18:31:42+00:00"
+            "time": "2025-03-16T15:39:47+00:00"
         },
         {
             "name": "dashifen/debugging",

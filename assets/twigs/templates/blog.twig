@@ -1,0 +1,22 @@
+{% extends '@layout/base.twig' %}
+
+{% block content %}
+  {{ page.content }}
+
+  <section class="articles">
+    {% for article in page.articles %}
+      <article id="article-{{ article.ID }}" class="article">
+        <header><h2>{{ article.post_title }}</h2></header>
+        {{ article.excerpt }}
+
+        {% if article.permalink is not empty %}
+          <footer>
+            <a href="{{ article.permalink }}">
+              Continue reading<span class="screen-reader-text"> about {{ article.post_title }}</span>
+            </a>
+          </footer>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </section>
+{% endblock %}

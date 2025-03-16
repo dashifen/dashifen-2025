@@ -23,6 +23,7 @@ class Router
       is_page()       => $this->getPageTemplate(),
       is_singular()   => $this->getPostTypeTemplate(),
       is_front_page() => 'HomepageTemplate',
+      is_home()       => 'BlogTemplate',
       is_404()        => 'FourOhFourTemplate',
       default         => 'DefaultTemplate',
     };

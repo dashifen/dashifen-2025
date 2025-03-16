@@ -1,20 +1,26 @@
 <footer id="site-footer" role="contentinfo">
-  <div class="listening">
-    <h3><a href="/listening">Listening:</a></h3>
-    <img src="{{ song.image }}" role="presentation" alt="">
-    <p><em>{{ song.name }}</em><br>by {{ song.artist }}</p>
-  </div>
+  {% if song.name | length > 0 %}
+    <div class="listening">
+      <h3><a href="/listening">Listening:</a></h3>
+      <img src="{{ song.image }}" role="presentation" alt="">
+      <p><em>{{ song.name }}</em><br>by {{ song.artist }}</p>
+    </div>
+  {% endif %}
 
-  <div class="reading">
-    {% set book = books[0] %}
-    <h3><a href="/reading">Reading:</a></h3>
-    <img src="{{ book.image }}" role="presentation" alt="">
-    <p><em>{{ book.title }}</em><br>by {{ book.people['author'] }}</p>
-    <figure>
-      <canvas class="progress" width="150" height="150" data-progress="{{ book.progress / book.pages }}"></canvas>
-      <figcaption>{{ book.percent }}
-    </figure>
-  </div>
+  {% if books is not empty %}
+    <div class="reading">
+      {% set book = books[0] %}
+      <h3><a href="/reading">Reading:</a></h3>
+      <img src="{{ book.image }}" role="presentation" alt="">
+      <p><em>{{ book.title }}</em><br>by {{ book.people['author'] }}</p>
+      {% if book.pages > 0 %}
+        <figure>
+          <canvas class="progress" width="150" height="150" data-progress="{{ book.progress / book.pages }}"></canvas>
+          <figcaption>{{ book.percent }}
+        </figure>
+      {% endif %}
+    </div>
+  {% endif %}
 
   {% if time.timeOfDay != 'oops' %}
     <p class="greeting">

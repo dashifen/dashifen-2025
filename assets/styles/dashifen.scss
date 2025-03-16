@@ -57,6 +57,14 @@
   }
 }
 
+.articles {
+  margin-block-start: mixins.rem(80px);
+  
+  .article + .article {
+  
+  }
+}
+
 #site-footer {
   background-color: variables.$purple;
   color: variables.$white;
