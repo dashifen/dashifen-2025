@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (canvas.getContext) {
     const ctx = canvas.getContext('2d');
     const progress = canvas.dataset.progress;
-    ctx.fillStyle = 'rgba(255,255,255,0.1)';
-    ctx.strokeStyle = 'white';
+    ctx.fillStyle = '#F0EBF4';
+    ctx.strokeStyle = 'rgba(122, 96, 140, 0.736)';   // accent non-content subdued
     
     // this part of the arc draws the progress itself with a thicker line.
     // then, the second path is the remainder of the full circle with a thin,

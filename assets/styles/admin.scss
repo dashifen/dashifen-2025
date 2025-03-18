@@ -11,12 +11,12 @@
 a {
   &:link,
   &:visited {
-    color: variables.$purple;
+    color: variables.$accentContentStrong;
   }
   
   &:active,
   &:focus,
   &:hover {
-    color: variables.$yellow;
+    text-decoration: none;
   }
 }

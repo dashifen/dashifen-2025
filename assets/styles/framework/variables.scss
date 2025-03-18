@@ -1,10 +1,21 @@
-$black: #060607;
-$white: #FFFFFF;
+$canvas: #F0EBF4;
+$card: #F8F5FA;
+$neutralContentStrong: #262229;
+$neutralNonContentStrong: #343036;
+$accentNonContentSubdued: rgba(122, 96, 140, 0.736);
+$accentNonContentStrong: #7A608C;
+$accentContentStrong: #604276;
+$neutralContentSubdued: rgba(38, 34, 41, 0.631);
+$neutralNonContentSoft: rgba(52, 48, 54, 0.059);
+
+/*$white: #FFFFFF;
 $gray: #D6D6D6;
 $pink: #93395C;
 $purple: #5D2189;
 $yellow: #6C5309;
-$silver: #DDDDDD;
+$silver: #DDDDDD;*/
+
+
 
 // Nunito is the web font we're using; the rest are copied from the modern
 // normalize styles so we fall back on the very thing that it wants to use as a

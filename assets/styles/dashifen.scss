@@ -4,8 +4,13 @@
 @use 'framework/wordpress';
 @use 'framework/base';
 
+:root {
+  --elevation-high: rgba(0, 0, 0, 0.25) 0px 0px 1px 0px, rgba(0, 0, 0, 0.05) 0px 4px 20px -4px, rgba(0, 0, 0, 0.01) 0px 10px 36px 0px;
+}
+
 #site-header {
-  background-color: variables.$purple;
+  background-color: variables.$card;
+  box-shadow: var(--elevation-high);
   margin-block-end: mixins.rem(24px);
   padding-block-end: mixins.rem(24px);
   
@@ -14,27 +19,46 @@
   }
   
   #page-title {
-    color: variables.$white;
+    color: variables.$neutralContentStrong;
     font-size: mixins.rem(36px);
     font-weight: bold;
     margin-block: mixins.rem(24px) 0;
   }
   
   .menu {
+    border-block-end: 1px solid variables.$neutralNonContentStrong;
     display: flex;
     flex-direction: row;
-    gap: mixins.rem(16px);
+    margin-inline-start: mixins.rem(-12px);
+    width: fit-content;
     
     .menu-item {
-      color: variables.$white;
-      outline-color: variables.$white;
-      outline-offset: mixins.rem(5px);
-      outline-width: mixins.rem(1px);
+      color: variables.$neutralContentSubdued;
+      display: block;
+      padding: mixins.rem(8px) mixins.rem(12px);
+      text-decoration: none;
       
       &:active,
       &:focus,
       &:hover {
-        outline: solid;
+        color: variables.$neutralContentStrong;
+        background: variables.$neutralNonContentSoft;
+      }
+      
+      &.is-current {
+        color: variables.$neutralContentStrong;
+        position: relative;
+        
+        &::after {
+          background: variables.$accentNonContentStrong;
+          bottom: 0;
+          content: "";
+          display: block;
+          height: mixins.rem(2px);
+          left: 0;
+          position: absolute;
+          width: 100%;
+        }
       }
     }
   }
@@ -66,8 +90,8 @@
 }
 
 #site-footer {
-  background-color: variables.$purple;
-  color: variables.$white;
+  background-color: variables.$card;
+  box-shadow: var(--elevation-high);
   display: grid;
   grid-gap: mixins.rem(10px);
   grid-template-columns: 1fr 1fr;
@@ -76,19 +100,6 @@
     "greeting greeting"
     "copyright copyright";
   margin-block-start: mixins.rem(48px);
-  
-  a {
-    color: variables.$white;
-    outline-color: variables.$white;
-    outline-offset: mixins.rem(5px);
-    outline-width: mixins.rem(1px);
-    
-    &:active,
-    &:focus,
-    &:hover {
-      outline: solid;
-    }
-  }
   
   .reading,
   .listening {
@@ -140,6 +151,12 @@
       grid-area: solo;
       text-align: center;
     }
+    
+    figcaption {
+      color: variables.$neutralContentStrong;
+      z-index: 1;
+    }
+    
   }
   
   .listening {

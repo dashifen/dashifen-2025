@@ -10,7 +10,8 @@
 }
 
 html, body {
-  color: variables.$black;
+  background-color: variables.$canvas;
+  color: variables.$neutralContentStrong;
   container-type: inline-size;
   font: normal 125%/1.6 variables.$font; // usually 20px
   height: 100%;
@@ -27,18 +28,15 @@ html.admin-bar {
 }
 
 a {
-  outline-color: variables.$yellow;
-  outline-offset: mixins.rem(4px);
-  
   &:link,
   &:visited {
-    color: variables.$purple;
+    color: variables.$accentContentStrong;
   }
   
   &:active,
   &:focus,
   &:hover {
-    color: variables.$yellow;
+    text-decoration: none;
   }
 }
 
@@ -56,10 +54,6 @@ main,
   padding-inline: max(var(--min-margin), 50cqw - var(--max-width) / 2);
 }
 
-main .full-bleed {
-  padding-inline: min(0px, var(--max-width) / 2 - 50cqw + var(--min-margin));
-}
-
 ul.menu {
   list-style-type: none;
   margin: 0;
@@ -67,7 +61,7 @@ ul.menu {
 }
 
 img {
-  border: 1px solid variables.$black;
+  border: 1px solid variables.$neutralContentStrong;
   border-radius: mixins.rem(5px);
 }
 

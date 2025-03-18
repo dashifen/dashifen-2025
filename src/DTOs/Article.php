@@ -2,9 +2,7 @@
 
 namespace Dashifen\WordPress\Themes\Dashifen2025\DTOs;
 
-use DOMDocument;
 use Dashifen\DTO\DTO;
-use WP_HTML_Tag_Processor;
 use Dashifen\WPDebugging\WPDebuggingTrait;
 
 class Article extends DTO
